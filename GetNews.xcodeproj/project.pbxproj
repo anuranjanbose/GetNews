@@ -14,6 +14,8 @@
 		7D3B2D94249551A60000B874 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7D3B2D92249551A60000B874 /* LaunchScreen.storyboard */; };
 		7DBCAD802495529F000484F1 /* NewsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DBCAD7F2495529F000484F1 /* NewsTableViewController.swift */; };
 		7DC8693C249561A600A05F6D /* Article.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DC8693B249561A600A05F6D /* Article.swift */; };
+		7DC8693F249563DA00A05F6D /* ArticleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DC8693E249563DA00A05F6D /* ArticleTableViewCell.swift */; };
+		7DC869422495673E00A05F6D /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DC869412495673E00A05F6D /* DataController.swift */; };
 		B4F1542C9D0DA8FA856F146A /* Pods_GetNews.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 29F9D03FAEEC32FC91D7F5B8 /* Pods_GetNews.framework */; };
 /* End PBXBuildFile section */
 
@@ -28,6 +30,8 @@
 		7D3B2D95249551A60000B874 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7DBCAD7F2495529F000484F1 /* NewsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsTableViewController.swift; sourceTree = "<group>"; };
 		7DC8693B249561A600A05F6D /* Article.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Article.swift; sourceTree = "<group>"; };
+		7DC8693E249563DA00A05F6D /* ArticleTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleTableViewCell.swift; sourceTree = "<group>"; };
+		7DC869412495673E00A05F6D /* DataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataController.swift; sourceTree = "<group>"; };
 		A9ED07DAE9DEE5F57EB12008 /* Pods-GetNews.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GetNews.debug.xcconfig"; path = "Target Support Files/Pods-GetNews/Pods-GetNews.debug.xcconfig"; sourceTree = "<group>"; };
 		EFB05E51792DFCDE4540C4A9 /* Pods-GetNews.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GetNews.release.xcconfig"; path = "Target Support Files/Pods-GetNews/Pods-GetNews.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -74,6 +78,8 @@
 		7D3B2D86249551A50000B874 /* GetNews */ = {
 			isa = PBXGroup;
 			children = (
+				7DC869402495657400A05F6D /* Controllers */,
+				7DC8693D249563C700A05F6D /* Cells */,
 				7DC8693A2495619500A05F6D /* Models */,
 				7D3B2D87249551A50000B874 /* AppDelegate.swift */,
 				7D3B2D89249551A50000B874 /* SceneDelegate.swift */,
@@ -81,7 +87,6 @@
 				7D3B2D90249551A60000B874 /* Assets.xcassets */,
 				7D3B2D92249551A60000B874 /* LaunchScreen.storyboard */,
 				7D3B2D95249551A60000B874 /* Info.plist */,
-				7DBCAD7F2495529F000484F1 /* NewsTableViewController.swift */,
 			);
 			path = GetNews;
 			sourceTree = "<group>";
@@ -92,6 +97,23 @@
 				7DC8693B249561A600A05F6D /* Article.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		7DC8693D249563C700A05F6D /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				7DC8693E249563DA00A05F6D /* ArticleTableViewCell.swift */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		7DC869402495657400A05F6D /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				7DBCAD7F2495529F000484F1 /* NewsTableViewController.swift */,
+				7DC869412495673E00A05F6D /* DataController.swift */,
+			);
+			path = Controllers;
 			sourceTree = "<group>";
 		};
 		D085DF0FBD7B1DCCC3A6B4BA /* Frameworks */ = {
@@ -217,6 +239,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7DC8693F249563DA00A05F6D /* ArticleTableViewCell.swift in Sources */,
+				7DC869422495673E00A05F6D /* DataController.swift in Sources */,
 				7DC8693C249561A600A05F6D /* Article.swift in Sources */,
 				7D3B2D88249551A50000B874 /* AppDelegate.swift in Sources */,
 				7D3B2D8A249551A50000B874 /* SceneDelegate.swift in Sources */,

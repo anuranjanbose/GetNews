@@ -11,7 +11,7 @@ import UIKit
 import RxSwift
 import RxCocoa
 
-class NewsTableViewController: UITableViewController {
+class NewsTableViewController: UITableViewController, DataController {
     
     let disposeBag = DisposeBag()
     
@@ -24,8 +24,10 @@ class NewsTableViewController: UITableViewController {
     }
     
     private func populateNews() {
-        
-        let url = URL(string: "https://newsapi.org/v2/top-headlines?country=us&apiKey=3853a66efa75400798dd1da0af19fe53")!
+                
+        guard let url = getURL() else {
+            fatalError("URL is broken")
+        }
         Observable.just(url)
             .flatMap { url -> Observable<Data> in
                 let request = URLRequest(url: url)
@@ -41,5 +43,26 @@ class NewsTableViewController: UITableViewController {
             }
             
             }).disposed(by: disposeBag)
+    }
+}
+
+// MARK: Datasource
+extension NewsTableViewController {
+    
+    override func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return self.articles.count
+    }
+    
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "ArticleTableViewCell", for: indexPath) as? ArticleTableViewCell else {
+            fatalError("ArticleTableViewCell not found")
+        }
+        cell.titleLabel.text = self.articles[indexPath.row].title
+        cell.descriptionLabel.text = self.articles[indexPath.row].description
+        return cell
     }
 }
