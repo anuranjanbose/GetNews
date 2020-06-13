@@ -1,20 +1,18 @@
 //
-//  ViewController.swift
+//  NewsTableViewController.swift
 //  GetNews
 //
 //  Created by Anuranjan Bose on 13/06/20.
 //  Copyright © 2020 Anuranjan Bose. All rights reserved.
 //
 
+import Foundation
 import UIKit
 
-class ViewController: UIViewController {
-
+class NewsTableViewController: UITableViewController {
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        self.navigationController?.navigationBar.prefersLargeTitles = true
     }
-
-
 }
-
