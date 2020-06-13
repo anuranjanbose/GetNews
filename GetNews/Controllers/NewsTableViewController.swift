@@ -24,10 +24,12 @@ class NewsTableViewController: UITableViewController, DataController {
     }
     
     private func populateNews() {
-                
+          
+        /*
         guard let url = getURL() else {
             fatalError("URL is broken")
         }
+        
         Observable.just(url)
             .flatMap { url -> Observable<Data> in
                 let request = URLRequest(url: url)
@@ -42,6 +44,17 @@ class NewsTableViewController: UITableViewController, DataController {
                 }
             }
             
+            }).disposed(by: disposeBag)
+         */
+                
+        URLRequest.load(resource: ArticlesList.all)
+            .subscribe(onNext: {[weak self] result in
+                if let result = result {
+                    self?.articles = result.articles
+                    DispatchQueue.main.async {
+                        self?.tableView.reloadData()
+                    }
+                }
             }).disposed(by: disposeBag)
     }
 }
