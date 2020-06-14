@@ -16,6 +16,7 @@ class NewsTableViewController: UITableViewController, DataController {
     let disposeBag = DisposeBag()
     
     private var articles = [Article]()
+    private var articleListVM: ArticleListViewModel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,9 +49,11 @@ class NewsTableViewController: UITableViewController, DataController {
          */
                 
         URLRequest.load(resource: ArticlesList.all)
-            .subscribe(onNext: {[weak self] result in
-                if let result = result {
-                    self?.articles = result.articles
+            .subscribe(onNext: {[weak self] articleResponse in
+                if let articleResponse = articleResponse {
+                    //self?.articles = articleResponse.articles
+                    let articles = articleResponse.articles
+                    self?.articleListVM = ArticleListViewModel(articles)
                     DispatchQueue.main.async {
                         self?.tableView.reloadData()
                     }
@@ -67,15 +70,30 @@ extension NewsTableViewController {
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.articles.count
+        //return self.articles.count
+        return self.articleListVM == nil ? 0 : self.articleListVM.articlesVM.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "ArticleTableViewCell", for: indexPath) as? ArticleTableViewCell else {
             fatalError("ArticleTableViewCell not found")
         }
-        cell.titleLabel.text = self.articles[indexPath.row].title
-        cell.descriptionLabel.text = self.articles[indexPath.row].description
+        
+        let articleVM = self.articleListVM.articleAt(indexPath.row)
+        
+        /// Do this
+        articleVM.title.asDriver(onErrorJustReturn: "")
+            .drive(cell.titleLabel.rx.text)
+            .disposed(by: disposeBag)
+        
+        articleVM.description.asDriver(onErrorJustReturn: "")
+            .drive(cell.descriptionLabel.rx.text)
+            .disposed(by: disposeBag)
+        
+        /// OR, pass in the viewModel
+        
+        //cell.configureCell(with: articleVM)
+        
         return cell
     }
 }
