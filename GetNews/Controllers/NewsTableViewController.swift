@@ -13,11 +13,11 @@ import RxCocoa
 
 class NewsTableViewController: UITableViewController, DataController {
     
+    // MARK: - Properties -
     let disposeBag = DisposeBag()
-    
-    private var articles = [Article]()
     private var articleListVM: ArticleListViewModel!
     
+    // MARK: - View Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.navigationBar.prefersLargeTitles = true
@@ -51,7 +51,6 @@ class NewsTableViewController: UITableViewController, DataController {
         URLRequest.load(resource: ArticlesList.all)
             .subscribe(onNext: {[weak self] articleResponse in
                 if let articleResponse = articleResponse {
-                    //self?.articles = articleResponse.articles
                     let articles = articleResponse.articles
                     self?.articleListVM = ArticleListViewModel(articles)
                     DispatchQueue.main.async {
@@ -70,7 +69,6 @@ extension NewsTableViewController {
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        //return self.articles.count
         return self.articleListVM == nil ? 0 : self.articleListVM.articlesVM.count
     }
     
@@ -91,7 +89,6 @@ extension NewsTableViewController {
             .disposed(by: disposeBag)
         
         /// OR, pass in the viewModel
-        
         //cell.configureCell(with: articleVM)
         
         return cell
